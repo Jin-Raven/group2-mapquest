@@ -70,7 +70,7 @@ while True:
         print("**********************************************")
     else:
         print("**********************************************")
-        print("For Staus Code: " + str(json_status) + "; Refer to: ")
+        print("For Status Code: " + str(json_status) + "; Refer to: ")
         print("https://developer.mapquest.com/documentation/directions-api/status-codes")
         print("**********************************************\n")
 
