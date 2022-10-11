@@ -8,7 +8,7 @@ from tabulate import tabulate
 init(autoreset=True)
 
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
-key = "gWCflqBbUBhDyGlxHavdpmiIwfGWO5tl"
+key = "Arw5GTcLkv2p0J5lzragSfTrW3jN9LCd"
 
 while True:
     orig = input("Starting Location: ")
