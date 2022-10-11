@@ -21,8 +21,10 @@ while True:
 
     #Added Selection of KM/MI output
     while True:
-        unit = input("Choose a unit [km/mi]: ")
+        unit = input("Choose a unit [km/mi/yd]: ")
         if (unit.lower() == "km"):
+            break
+        elif (unit.lower() == "yd"):
             break
         elif (unit.lower() == "mi"):
             break
@@ -41,17 +43,21 @@ while True:
        #Added KM/MI output with table
         if (unit.lower() == "km"):
               data = [[orig, dest, json_data["route"]["formattedTime"], str("{:.2f}".format((json_data["route"]["distance"])*1.61)), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78))]]
-              print(Fore.LIGHTBLUE_EX  + tabulate(data, headers=["From", "To", "Trip Duration", "Kilometers", "Fuels Used(Ltr)"]))
+              print(Fore.LIGHTGREEN_EX  + tabulate(data, headers=["From", "To", "Trip Duration", "Kilometers", "Fuels Used(Ltr)"]))
+        
+        elif (unit.lower() == "yd"):
+            data = [[orig, dest, json_data["route"]["formattedTime"], str("{:.2f}".format((json_data["route"]["distance"])*1760)), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78))]]
+            print(Fore.LIGHTGREEN_EX  + tabulate(data, headers=["From", "To", "Trip Duration", "Yards", "Fuels Used(Ltr)"]))
          
         elif (unit.lower() == "mi"):
             data = [[orig, dest, json_data["route"]["formattedTime"], str("{:.2f}".format(json_data["route"]["distance"])), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78))]]
-            print(Fore.LIGHTBLUE_EX  + tabulate(data, headers=["From", "To", "Trip Duration", "Miles", "Fuels Used(Ltr)"]))
+            print(Fore.LIGHTGREEN_EX  + tabulate(data, headers=["From", "To", "Trip Duration", "Miles", "Fuels Used(Ltr)"]))
 
 
         print("=============================================") 
 
         for each in json_data["route"]["legs"][0]["maneuvers"]:
-            print(Fore.LIGHTYELLOW_EX + (each["narrative"])+ " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
+            print(Fore.LIGHTCYAN_EX + (each["narrative"])+ " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
 
         print("=============================================") 
     elif json_status == 402:
