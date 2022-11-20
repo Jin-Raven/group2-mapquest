@@ -10,6 +10,7 @@ init(autoreset=True)
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
 key = "Arw5GTcLkv2p0J5lzragSfTrW3jN9LCd"
 
+
 while True:
     orig = input("Starting Location: ")
     if orig == "quit" or orig == "q":
@@ -38,26 +39,30 @@ while True:
 
     if json_status == 0:
         print(Fore.GREEN + "API Status: " + str(json_status) + " = A successful route call.\n")
-        print(Fore.WHITE + "=============================================")
+        print(Fore.WHITE + "=====================================================================")
     
        #Added KM/MI output with table
         if (unit.lower() == "km"):
-              data = [[orig, dest, json_data["route"]["formattedTime"], str("{:.2f}".format((json_data["route"]["distance"])*1.61)), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78))]]
-              print(Fore.LIGHTGREEN_EX  + tabulate(data, headers=["From", "To", "Trip Duration", "Kilometers", "Fuels Used(Ltr)"]))
+              data = [[orig, dest, json_data["route"]["formattedTime"], str("{:.2f}".format((json_data["route"]["distance"])*1.61)), str("{:.2f}".format((json_data["route"]["distance"])*3.78))]]
+              print(Fore.LIGHTGREEN_EX  + tabulate(data, headers=["From", "To", "Trip Duration", "Kilometers", "Fuels Used(Ltr)"], tablefmt='fancy_grid'))
         
         elif (unit.lower() == "yd"):
-            data = [[orig, dest, json_data["route"]["formattedTime"], str("{:.2f}".format((json_data["route"]["distance"])*1760)), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78))]]
-            print(Fore.LIGHTGREEN_EX  + tabulate(data, headers=["From", "To", "Trip Duration", "Yards", "Fuels Used(Ltr)"]))
+            data = [[orig, dest, json_data["route"]["formattedTime"], str("{:.2f}".format((json_data["route"]["distance"])*1760)), str("{:.2f}".format((json_data["route"]["distance"])*3.78))]]
+            print(Fore.LIGHTGREEN_EX  + tabulate(data, headers=["From", "To", "Trip Duration", "Yards", "Fuels Used(Ltr)"], tablefmt='fancy_grid'))
          
         elif (unit.lower() == "mi"):
-            data = [[orig, dest, json_data["route"]["formattedTime"], str("{:.2f}".format(json_data["route"]["distance"])), str("{:.2f}".format((json_data["route"]["fuelUsed"])*3.78))]]
-            print(Fore.LIGHTGREEN_EX  + tabulate(data, headers=["From", "To", "Trip Duration", "Miles", "Fuels Used(Ltr)"]))
+            data = [[orig, dest, json_data["route"]["formattedTime"], str("{:.2f}".format(json_data["route"]["distance"])), str("{:.2f}".format((json_data["route"]["distance"])*3.78))]]
+            print(Fore.LIGHTGREEN_EX  + tabulate(data, headers=["From", "To", "Trip Duration", "Miles", "Fuels Used(Ltr)" ], tablefmt='fancy_grid'))
 
 
-        print("=============================================") 
-
+        print("=====================================================================") 
+        print("Directions")
+        i = 1
         for each in json_data["route"]["legs"][0]["maneuvers"]:
-            print(Fore.LIGHTCYAN_EX + (each["narrative"])+ " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
+
+            print(str(i) + ". " + Fore.LIGHTCYAN_EX + (each["narrative"])+ " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
+            i += 1
+
 
         print("=============================================") 
     elif json_status == 402:
