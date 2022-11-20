@@ -81,7 +81,7 @@ while True:
 
 
     #Added if user wants to reinput another location
-    repeat = input('Restart? (Y/N): ')
+    repeat = input('Restart? (Y/Nsdsdsdsd): ')
     print("")
     if (repeat.lower() == 'yes' or repeat.lower() == 'y'):
         continue
